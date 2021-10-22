@@ -1,0 +1,521 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Week 4</title>
+  <script>
+
+  </script>
+
+  <style>
+  </style>
+</head>
+
+<body>
+    <h1>Questions and Facts:</h1>
+  <p>Question: why use the label tag in forms?</p>
+  <p>Form Controls
+    <input> text, passwords, check boxes, radio buttons, file uploads
+    <select> menus drop down lists
+    <textarea> longer places to write
+    <button> submitting and resetting
+    </p>
+  <p>Question: Why use the constructor function instead of the original one?</p>
+  <style>
+    /* .board-cont {
+        margin: auto;
+        width: 30%;
+        margin-top: 10%;
+    }
+    
+    table {
+        border-collapse: collapse;
+    }
+    
+    table td {
+        padding: 80px;
+        border: 1px solid rgb(113, 113, 113);
+    }
+    
+    table tr:nth-child(1) td:nth-child(1) {
+        border-top: none;
+        border-left: none;
+    }
+    
+    table tr:nth-child(1) td:nth-child(2) {
+        border-top: none;
+    }
+    
+    table tr:nth-child(1) td:nth-child(3) {
+        border-top: none;
+        border-right: none;
+    }
+    
+    table tr:nth-child(2) td:nth-child(1) {
+        border-left: none;
+    }
+    
+    table tr:nth-child(2) td:nth-child(3) {
+        border-right: none;
+    }
+    
+    table tr:nth-child(3) td:nth-child(1) {
+        border-bottom: none;
+        border-left: none;
+    }
+    
+    table tr:nth-child(3) td:nth-child(2) {
+        border-bottom: none;
+    }
+    
+    table tr:nth-child(3) td:nth-child(3) {
+        border-bottom: none;
+        border-right: none;
+    }
+    
+    h2 {
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        color: darkgreen;
+    }
+    
+    button {
+        padding: 15px 30px;
+        background-color: cornflowerblue;
+        border: none;
+        color: #fff;
+        display: block;
+        margin: 0 auto;
+        border-radius: 5px;
+        margin: 10px;
+        text-transform: uppercase;
+    }
+    
+    button:active {
+        opacity: .7;
+    }*/
+    
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        height: 400px;
+        width: 400px;
+    }
+    
+    .cell {
+        border: 1px solid black;
+    }
+    
+    div:nth-child(1) {
+        border-top: none;
+        border-left: none;
+    }
+    
+    div:nth-child(2) {
+        border-top: none;
+    }
+    
+    div:nth-child(3) {
+        border-top: none;
+        border-right: none;
+    }
+    
+    div:nth-child(4) {
+        border-left: none;
+    }
+</style>
+
+
+<!--div class="board-cont">
+    <table>
+        <tr>
+            <td ontouchend="play(this)"></td>
+            <td ontouchend="play(this)"></td>
+            <td ontouchend="play(this)"></td>
+        </tr>
+        <tr>
+            <td ontouchend="play(this)"> </td>
+            <td ontouchend="play(this)"> </td>
+            <td ontouchend="play(this)"></td>
+        </tr>
+        <tr>
+            <td ontouchend="play(this)"> </td>
+            <td ontouchend="play(this)"> </td>
+            <td ontouchend="play(this)"></td>
+        </tr>
+    </table>
+    <button onclick="reset()" id="reset">Reset Game</button>
+    <h2 id="message">New Game - Player #1 starts playing</h2>
+</div-->
+
+<div class="grid">
+    <div class="cell" id="cell0" ontouchend="play(this)"></div>
+    <div class="cell" id="cell1" ontouchend="play(this)"></div>
+    <div class="cell" id="cell2" ontouchend="play(this)"></div>
+    <div class="cell" id="cell3" ontouchend="play(this)"></div>
+    <div class="cell" id="cell4" ontouchend="play(this)"></div>
+    <div class="cell" id="cell5" ontouchend="play(this)"></div>
+    <div class="cell" id="cell6" ontouchend="play(this)"></div>
+    <div class="cell" id="cell7" ontouchend="play(this)"></div>
+    <div class="cell" id="cell8" ontouchend="play(this)"></div>
+    <button id="reset" onclick="reset()">Reset</button>
+    <div id="output"></div>
+</div>
+
+
+<script>
+    const player1 = "X";
+    const player2 = "O";
+    let player = player1;
+
+
+
+
+    function play(id) {
+        document.getElementById('output').innerHTML = "";
+        if (!id.innerHTML) {
+            id.innerHTML = player;
+            changePlayer();
+        }
+        /*if (document.getElementById('cell0').innerHTML == "X" && document.getElementById('cell1').innerHTML == "X" && document.getElementById('cell1').innerHTML == "X") {
+            alert("You win!");
+        }*/
+        let win = 0;
+        if ((document.getElementById('cell0').innerHTML == document.getElementById('cell1').innerHTML && document.getElementById('cell0').innerHTML == document.getElementById('cell2').innerHTML) && (document.getElementById('cell0').innerHTML)) {
+            if (document.getElementById('cell0').innerHTML == "X") {
+                document.getElementById('output').innerHTML = "Player #1 Win!!";
+            } else {
+                document.getElementById('output').innerHTML = "Player #2 Win!!";
+            }
+            win = 1;
+            reset()
+        } else if ((document.getElementById('cell3').innerHTML == document.getElementById('cell4').innerHTML && document.getElementById('cell3').innerHTML == document.getElementById('cell5').innerHTML) && (document.getElementById('cell3').innerHTML)) {
+            if (document.getElementById('cell3').innerHTML == "X") {
+                document.getElementById('output').innerHTML = "Player #1 Win!!";
+            } else {
+                document.getElementById('output').innerHTML = "Player #2 Win!!";
+            }
+
+            win = 1;
+            reset()
+        }
+        if (document.getElementById('cell0').innerHTML && document.getElementById('cell1').innerHTML && document.getElementById('cell2').innerHTML && document.getElementById('cell3').innerHTML && document.getElementById('cell4').innerHTML && document.getElementById('cell5').innerHTML && document.getElementById('cell6').innerHTML && document.getElementById('cell7').innerHTML && document.getElementById('cell8').innerHTML && (win == 0)) {
+            document.getElementById('output').innerHTML = "It's a DRAW";
+            //reset()
+        }
+    }
+
+
+
+
+    document.getElementById('board').addEventListener('ontouchend');
+
+    function changePlayer() {
+        if (player == player1) {
+            player = player2;
+        } else {
+            player = player1;
+        }
+    }
+
+    function reset() {
+        document.querySelectorAll(".cell").forEach((cell) => (cell.textContent = ""));
+        //document.getElementById('output').innerHTML = "";
+    }
+</script>
+
+
+<!--
+    Another Version Example
+
+     <style type="text/css">            
+            body div {
+                width: 350px;
+                margin: auto;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            #gameboard {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr;
+                margin: 3em auto;
+                height: 15em;
+                width: 15em;
+            }
+
+            .cell {
+                display: flex;
+                width: 100%;
+                height: 100%;
+                font-size: 48px;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .cell:nth-child(1n) {
+                border-right: 1px solid black;
+                border-bottom: 1px solid black;
+            }
+
+            .cell:nth-child(3n) {
+                border-right: none;
+            }
+
+            .cell:nth-child(1n+7) {
+                border-bottom:none;
+            }
+            
+            #stats {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                width: 50%;
+                margin: 20px auto;
+            }
+            
+            #stats_header {
+                flex-basis: 100%;
+                margin: 16px auto 2px;                
+            }
+            
+            #players {
+                display: flex;
+                flex-flow: wrap;
+                justify-content: center;
+                margin: 10px auto;
+            }
+            
+            #players > p {
+                flex-basis: 60px;
+                margin: 3px 10px 5px;
+            }
+            
+            .player {
+                flex-grow: 1;
+                flex-basis: 50%;
+                border-bottom: 1px solid black;
+            }
+        </style>
+
+         <body>
+        <div>
+            <h1>Team Activity: Week 04</h1>
+            <h2>Tic Tac Toe</h2>
+            <div id="gameboard">
+                <div class="cell" id="c0"></div>
+                <div class="cell" id="c1"></div>
+                <div class="cell" id="c2"></div>
+                <div class="cell" id="c3"></div>
+                <div class="cell" id="c4"></div>
+                <div class="cell" id="c5"></div>
+                <div class="cell" id="c6"></div>
+                <div class="cell" id="c7"></div>
+                <div class="cell" id="c8"></div>
+            </div>
+            <div>
+                <p id="player_status">Player 1: You Start!</p>
+            </div>
+            <div>
+                <button id="reset" name="RESET" onclick="resetBoard()">RESET</button>
+            </div>
+            <div id="stats">
+                <h3 id="stats_header">Number of Wins</h3>
+                <div id="players">
+                    <p class="player" id="p1">Player 1</p>
+                    <p class="player" id="p2">Player 2</p>
+                    <p id="p1_wins">0</p>
+                    <p id="p2_wins">0</p>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script type="text/javascript">
+        // set all winning combinations
+        const winningConditions = [
+            ['c0','c1','c2'],
+            ['c3','c4','c5'],
+            ['c6','c7','c8'],
+            ['c0','c3','c6'],
+            ['c1','c4','c7'],
+            ['c2','c5','c8'],
+            ['c2','c4','c6'],
+            ['c0','c4','c8']
+        ]
+
+        // set initial player
+        let player = 1;
+        
+        // set win status
+        let noWinner = true;
+        
+        let emptyCells = true;
+        
+        const cell = document.querySelectorAll('.cell');
+        
+        window.addEventListener('load', startListening);
+
+        /**************************************************
+         * startListening()
+         * Description: add a click event listener to all
+         * game board spaces 
+         * input: element
+         * return: none
+         * *************************************************/
+        function startListening() {
+            // add touchend listener
+            cell.forEach(e => e.addEventListener('click', play));
+            //cell.forEach(e => e.addEventListener('touchend', play));
+        }
+        
+        /**************************************************
+         * play()
+         * Description: if the touched cell is open, places
+         * the active players sign in the touched cell and
+         * then changes the active player
+         * input: element
+         * return: none
+         * *************************************************/
+        function play() {
+            
+            if (!this.innerHTML) {
+                this.innerHTML = getSymbol(player);
+            }
+            
+            emptyCells = checkForEmptySpaces();
+            
+            checkForWin(player);
+        }
+        
+        /**************************************************
+         * checkCells()
+         * Description: check game board for empty cells
+         * input: none
+         * return: boolean
+         * *************************************************/
+        function checkForEmptySpaces() {
+            // create an array of all game spaces
+            const spaces = document.querySelectorAll('.cell');
+            
+            let filledCells = 0;
+            
+            // loop through all cells looking for played space
+            spaces.forEach(cell => {
+                // if cell has been select, count it as a filled space
+                if (cell.innerHTML) {
+                    filledCells ++;
+                }
+            })
+            
+            // all spaces have been played return false
+            // otherwise return true
+            if (filledCells == 9) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        /*****************************************
+         * changePlayer()
+         * Description: changes the active player
+         * and player status
+         * input: number
+         * return: none
+         * ****************************************/
+        function changePlayer(currentPlayer) {
+            if (currentPlayer == 1) {
+                player = 2;
+                document.getElementById('player_status').innerHTML = "Player 2: Your Turn!";
+            } else {
+                player = 1;
+                document.getElementById('player_status').innerHTML = "Player 1: Your Turn!";
+            }
+        }
+
+        /*****************************************
+         * getSymbol()
+         * Description: Gets the symbol for the
+         * active player
+         * input: number
+         * return: string
+         * ****************************************/
+        function getSymbol(currentPlayer) {
+            if (currentPlayer == 1) {
+                return 'X';
+            } else {            
+                return 'O';
+            }
+        }
+
+        /*****************************************
+         * resetBoard()
+         * Description: Resets game board and player
+         * status
+         * input: none
+         * return: none
+         * ****************************************/
+        function resetBoard() {
+            //const cells = document.querySelectorAll('.cell');
+            cell.forEach(element => element.innerHTML = "");
+            
+            document.getElementById('player_status').innerHTML = "Player 1: You Start!";
+            
+            player = 1;
+            
+            noWinner = true;
+            
+            startListening();
+        }
+
+        /*****************************************
+         * checkForWin()
+         * Description: compares each cell of the
+         * active player against the winning conditions.
+         * If no winning condition is satisfied, next
+         * player gets a turn
+         * input: number
+         * return: none
+         * ****************************************/
+        function checkForWin(currentPlayer) {
+            // check each cell in the winning condition for active players symbol
+            // if any winning condition equals true, active player wins
+            winningConditions.forEach(cond => {
+                if (document.getElementById(cond[0]).innerHTML == getSymbol(currentPlayer) && document.getElementById(cond[1]).innerHTML == getSymbol(currentPlayer) && document.getElementById(cond[2]).innerHTML == getSymbol(currentPlayer)) {
+                    // declare a winner
+                    document.getElementById('player_status').innerHTML = `Player ${currentPlayer} Wins!!!`;
+
+                    // set win status
+                    noWinner = false;
+                    
+                    // get the value of the current players winnings
+                    let wins = parseInt(document.getElementById(`p${currentPlayer}_wins`).innerHTML);
+                    
+                    // increase wins by 1
+                    wins += 1;
+                    
+                    // update current players win total
+                    document.getElementById(`p${currentPlayer}_wins`).innerHTML = wins;
+                    
+                    cell.forEach(e => e.removeEventListener('click', play));
+                }
+            });
+            
+            // change player if no winner and empty cells
+            if (noWinner && emptyCells) {
+                changePlayer(currentPlayer);
+            }  
+            // change game status if no winner and no empty cells
+            else if (noWinner && !emptyCells) {
+                document.getElementById('player_status').innerHTML = "IT IS A DRAW!";
+            }
+        }
+    </script>
+-->
+  
+</body>
+
+</html>
