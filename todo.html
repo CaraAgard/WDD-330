@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+  
+  
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-width: 250px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+ 
+  ul {
+    margin: 0;
+    padding: 0;
+    width: 50%;
+  }
+  
+ 
+  ul li {
+    
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    list-style-type: none;
+    background: lavenderblush;
+    font-size: 24px;
+  }
+  h1 {
+    background-color: lightpink;
+    width: 50%;
+  }
+  
+  ul li:hover {
+    background: lavender;
+  }
+  
+  ul li.done {
+    background: plum;
+    
+  }
+  
+  
+  ul li.done::before {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 20px;
+  left: 10px;
+  transform: rotate(-45deg);
+  height: 15px;
+  width: 15px;
+}
+
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 16px;
+  }
+  
+  .close:hover {
+    background-color: pink;
+  }
+  
+  .add {
+    background-color: pink;
+    padding: 0px 10px;
+    width: 50%;
+  }
+  
+  .header:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  input {
+    margin: 0;
+    border: none;
+    width: 75%;
+    padding: 10px;
+    background-color: lightyellow;
+    font-size: 16px;
+  }
+  
+  .btn {
+    padding: 10px;
+    width: 25%;
+    background: plum;
+    float: right;
+    font-size: 18px;
+  }
+  
+  .btn:hover {
+    background-color: rgb(151, 102, 151);
+  }
+
+</style>
+</head>
+<body>
+
+<h1>To Do List</h1>
+
+<ul id="list">
+  <li class="done">Dishes</li>
+  <li>Homework</li>
+  <li>Shop</li>
+  
+</ul>
+
+<div  class="add">
+  <h2>Add Item</h2>
+  <input type="text" id="user" placeholder="type here">
+  <span onclick="newElement()" class="btn">Add</span>
+</div>
+<p id="week"></p>
+
+<script>
+
+var myNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+
+
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+
+
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('done');
+  }
+}, false);
+
+
+function newElement() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("user").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("Need to add item");
+  } else {
+    document.getElementById("list").appendChild(li);
+  }
+  document.getElementById("user").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+}
+
+</script>
+
+</body>
+</html>
